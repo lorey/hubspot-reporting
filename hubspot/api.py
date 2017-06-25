@@ -30,7 +30,7 @@ def fetch_deals():
         'hapikey': config.HUBSPOT_HAPIKEY,
         'includeAssociations': 'true',
          'limit': 250,
-        'properties': ['name', 'pipeline', 'dealstage', 'amount'],
+        'properties': ['dealname', 'pipeline', 'dealstage', 'amount'],
     }
 
     special_parameter_keys = ['properties']

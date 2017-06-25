@@ -1,3 +1,5 @@
+import logging
+
 import hubspot.api
 
 
@@ -21,6 +23,10 @@ class Deal(object):
         return hubspot.api.fetch_stage(stage_id)
 
     def get_amount(self):
+        if 'amount' not in self.data['properties']:
+            logging.warning('Deal amount not in %s properties, assuming 0' % self.data['properties']['dealname']['value'])
+            return 0
+
         return int(self.data['properties']['amount']['value'])
 
     def get_amount_expected(self):
