@@ -50,12 +50,17 @@ def write_data_to_csv():
         overall_deal_amount_expected
     ]
 
-    if not os.path.isfile('data.csv'):
-        with open('data.csv', 'a') as file:
+    filename = 'data.csv'
+
+    # make sure csv exists
+    if not os.path.isfile(filename):
+        with open(filename, 'a') as file:
             cw = csv.writer(file)
+            # write header
             cw.writerow(['date', 'deals_closed', 'deals_funnel'])
 
-    with open('data.csv', 'a') as file:
+    # append new row
+    with open(filename, 'a') as file:
         cw = csv.writer(file)
         cw.writerow(fields)
 
