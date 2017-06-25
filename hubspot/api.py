@@ -4,7 +4,7 @@ import urllib
 import requests
 
 import config
-from hubspot.deals import Deal, Stage
+from hubspot.deals import Deal, Stage, Pipeline
 
 BASE_URL = 'https://api.hubapi.com/'
 
@@ -14,7 +14,7 @@ def fetch_pipelines():
     response = requests.get(url)
     response_decoded = response.content.decode('utf-8')
     data = json.loads(response_decoded)
-    return data
+    return [Pipeline(data_pipeline) for data_pipeline in data]
 
 
 def fetch_deal_properties():
@@ -64,7 +64,7 @@ def execute_request(endpoint, parameters):
 
 def fetch_stage(id):
     pipeline_data = fetch_pipelines()  # replace
-    stages_with_id = [stage for pipeline in pipeline_data for stage in pipeline['stages'] if
+    stages_with_id = [stage for pipeline in pipeline_data for stage in pipeline.data['stages'] if
                       stage['stageId'] == id]
     data = next(iter(stages_with_id), None)
     return Stage(data)

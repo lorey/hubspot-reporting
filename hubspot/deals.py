@@ -18,6 +18,9 @@ class Deal(object):
 
         return self.stage
 
+    def get_pipeline_id(self):
+        return self.data['properties']['pipeline']['value']
+
     def fetch_stage(self):
         stage_id = self.data['properties']['dealstage']['value']
         return hubspot.api.fetch_stage(stage_id)
@@ -34,6 +37,19 @@ class Deal(object):
 
     def is_won(self):
         return self.get_stage().is_won()
+
+
+class Pipeline(object):
+    data = None
+
+    def __init__(self, data):
+        self.data = data
+
+    def get_id(self):
+        return self.data['pipelineId']
+
+    def get_label(self):
+        return self.data['label']
 
 
 class Stage(object):
