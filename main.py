@@ -51,8 +51,8 @@ def generate_charts_from_csv(csv_path):
 def generate_deal_count_plot(r, path):
     fig, ax = pyplot.subplots()
 
-    ax.plot(r.date, r.deals_funnel, 'o-', label='Deal Funnel')
-    ax.plot(r.date, r.deals_closed, 'o-', label='Closed Deals')
+    ax.plot(r.date, r.deals_funnel, '-', label='Deal Funnel')
+    ax.plot(r.date, r.deals_closed, '-', label='Closed Deals')
 
     fig.autofmt_xdate()  # ?
 
@@ -67,8 +67,8 @@ def generate_deal_count_plot(r, path):
 def generate_deal_amount_plot(r, path):
     fig, ax = pyplot.subplots()
 
-    ax.plot(r.date, r.deals_amount_funnel, 'o-', label='Deal Funnel')
-    ax.plot(r.date, r.deals_amount_closed, 'o-', label='Closed Deals')
+    ax.plot(r.date, r.deals_amount_funnel, '-', label='Deal Funnel')
+    ax.plot(r.date, r.deals_amount_closed, '-', label='Closed Deals')
 
     fig.autofmt_xdate()  # ?
 
