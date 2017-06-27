@@ -20,7 +20,7 @@ def main():
             os.makedirs(dir_path)
 
         write_data_to_csv(file_path, pipeline_id=pipeline.get_id())
-        generate_charts_from_csv(file_path)
+        generate_charts_from_csv(file_path, title=pipeline.get_label())
 
     # plot overall
     filename = 'data.csv'
@@ -31,10 +31,10 @@ def main():
         os.makedirs(dir_path)
 
     write_data_to_csv(file_path)
-    generate_charts_from_csv(file_path)
+    generate_charts_from_csv(file_path, title='all deals')
 
 
-def generate_charts_from_csv(csv_path):
+def generate_charts_from_csv(csv_path, title=None):
     # http://matplotlib.org/examples/api/date_index_formatter.html
     r = mlab.csv2rec(open(csv_path))
 
@@ -44,11 +44,11 @@ def generate_charts_from_csv(csv_path):
     r.sort()
     r = r[-30:]  # get the last 30 values
 
-    generate_deal_amount_plot(r, path)
-    generate_deal_count_plot(r, path)
+    generate_deal_amount_plot(r, path, title=title)
+    generate_deal_count_plot(r, path, title=title)
 
 
-def generate_deal_count_plot(r, path):
+def generate_deal_count_plot(r, path, title=None):
     fig, ax = pyplot.subplots()
 
     ax.plot(r.date, r.deals_funnel, '-', label='Deal Funnel')
@@ -56,7 +56,11 @@ def generate_deal_count_plot(r, path):
 
     fig.autofmt_xdate()  # ?
 
-    pyplot.title('Deal Flow')
+    if title is not None:
+        pyplot.title('Deal Flow (%s)' % title)
+    else:
+        pyplot.title('Deal Flow')
+
     pyplot.xlabel('Date')
     pyplot.ylabel('# of Deals')
     pyplot.legend(loc='best')
@@ -64,7 +68,7 @@ def generate_deal_count_plot(r, path):
     pyplot.savefig(path + 'deal_count')
 
 
-def generate_deal_amount_plot(r, path):
+def generate_deal_amount_plot(r, path, title=None):
     fig, ax = pyplot.subplots()
 
     ax.plot(r.date, r.deals_amount_funnel, '-', label='Deal Funnel')
@@ -72,7 +76,11 @@ def generate_deal_amount_plot(r, path):
 
     fig.autofmt_xdate()  # ?
 
-    pyplot.title('Deal Flow')
+    if title is not None:
+        pyplot.title('Deal Flow (%s)' % title)
+    else:
+        pyplot.title('Deal Flow')
+
     pyplot.xlabel('Date')
     pyplot.ylabel('Amount in Euros')
     pyplot.legend(loc='best')
