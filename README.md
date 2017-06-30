@@ -1,10 +1,10 @@
 # Script to automate HubSpot Reporting
 
-I love [HubSpot](https://hubspot.com) to organize my sales leads and to get an overview of my sales funnel. Because of that I use it for many projects and even for myself personally. In many situations, I need to get a quick overview of my funnel and/or send it to someone else, for example when writing reports for mentors or my startup's advisory board. That's why I created this script to generate diagrams of my sales funnel.
+I love using [HubSpot](https://hubspot.com) to organize my sales leads and to get an overview of my sales funnel. Because of that I use it for many projects and even for myself personally. In many situations, I need to get a quick overview of my funnel and/or send it to someone else, for example when writing reports for mentors or my startup's advisory board. That's why I created this script to generate diagrams of my sales funnel.
 
 ## So what can it do for you?
 
-This Python script generates CSVs and diagrams for all of your sales pipelines automatically. This way, you can generate automated reports for your stakeholders, for example by including them in a LaTeX report.
+This Python script generates CSVs and diagrams for all of your Deal Pipelines automatically. Deal Pipelines are a custom deal funnel every sale has to go through, e.g. `call`, `meeting`, `contact signed`. With the script, you can generate automated reports for your stakeholders, for example by including the resulting diagrams in a LaTeX report.
 
 ## How does it work?
 
@@ -14,11 +14,11 @@ Running is as easy as
 python3 main.py
 ```
 
-The tool then executes to main tasks: It fetches the data, stores it in csv files and generates diagrams from the csv files afterwards. This way, you can extend the csv data if you like or separate the data generation from the plotting. Here's how the two steps work:
+The tool then executes two main tasks: It fetches the data, stores it in CSV files and generates diagrams from the stored files afterwards. This way, you can extend the csv data if you like or separate the data generation from the plotting. Here's how the two steps work in detail:
 
 ### 1: Fetch HubSpot data
 
-In the first step, the tool fetches your pipelines via the HubSpot API. For each pipeline it generates a folder named like the the pipline_id (so don't worry if you see cryptic folders). The tool will then generate a CSV file named `data.csv` in each folder that looks like this:
+In the first step, the tool fetches your Deal Pipelines via the HubSpot API. For each pipeline it generates a folder named after the the `pipline_id` (so don't worry if you see cryptic folders). The tool will then generate a CSV file named `data.csv` in each folder that looks like this:
 
 ```
 date,deals_closed,deals_funnel,deals_amount_closed,deals_amount_funnel
@@ -81,16 +81,23 @@ The title of each diagram will contain the name of the pipeline. You can find th
 
 # Installation
 
-The installation is pretty straightforward. Make sure matplotlib and requests are installed, create a config file as shown below, and run main.py periodically, for example by creating a cron job.
+The installation is pretty straightforward. Make sure `matplotlib` and `requests` are installed, create a `config.py` file as shown below, and run `python main.py` periodically, for example by creating a daily cron job.
 
 ## config.py
-You can generate an API key by clicking at your profile picture, then at `Integrations`, and finally at `HubSpot API key`
 
 ```
 HUBSPOT_HAPIKEY = 'yourkeyhere'
 ```
 
-# Also check my other HubSpot-related projects
+You can generate an API key by clicking at your profile picture in HubSpot, then at `Integrations`, and finally at `HubSpot API key`.
+
+## Further reading
+
+- [HubSpot API: Deals](https://developers.hubspot.com/docs/methods/deals/deals_overview)
+- [HubSpot API: Deal Pipelines](https://developers.hubspot.com/docs/methods/deal-pipelines/overview)
+- [Effectively Using Matplotlib (Tutorial)](http://pbpython.com/effective-matplotlib.html)
+
+### Also check my other HubSpot-related projects
 
 - [Totally not Jarvis, a personal assisstant bot with HubSpot integration](https://github.com/lorey/totally-not-jarvis)
 - [hubspot-contact-import: A HubSpot import tool for vcards and Xing](https://github.com/lorey/hubspot-contact-import)
