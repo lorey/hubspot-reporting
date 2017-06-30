@@ -99,6 +99,7 @@ You can generate an API key by clicking at your profile picture in HubSpot, then
 
 ### Also check my other HubSpot-related projects
 
+- [awesome-hubspot: Tools and libraries for HubSpot](https://github.com/lorey/awesome-hubspot)
 - [Totally not Jarvis, a personal assisstant bot with HubSpot integration](https://github.com/lorey/totally-not-jarvis)
 - [hubspot-contact-import: A HubSpot import tool for vcards and Xing](https://github.com/lorey/hubspot-contact-import)
 - [hubspot-reporting: tool to generate diagrams from your hubspot data](https://github.com/lorey/hubspot-reporting)
